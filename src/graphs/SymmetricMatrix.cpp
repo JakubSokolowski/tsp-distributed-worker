@@ -50,7 +50,7 @@ uint SymmetricMatrix::GetNumOfVertices() const {
 }
 
 std::string SymmetricMatrix::GetGraphInfo() const {
-    return std::__cxx11::string();
+    return "info";
 }
 
 void SymmetricMatrix::Print() const {

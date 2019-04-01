@@ -1,32 +1,22 @@
-dist: trusty
 sudo: false
-language: cpp
 
-
-# Handle git submodules yourself
-git:
-    submodules: false
-# Use sed to replace the SSH URL with the public URL, then initialize submodules
-before_install:
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-    - git submodule update --init --recursive
+language:
+  - cpp
 
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - llvm-toolchain-trusty-5.0
-    packages:
-      - g++-6
-      - clang-5.0
 
 before_install:
   - pip install --user cpp-coveralls
 
 script:
-  - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCOVERAGE=1 .
+  - mkdir build
+  - cd build
+  - cmake ..
   - cmake --build .
-  - ./cmake-build-debug/test/tests/RunTests
+  - ./bin/RunTests
 
-after_success:
-  - coveralls --root . -E ".*CMakeFiles.*"
+notifications:
+  email: false

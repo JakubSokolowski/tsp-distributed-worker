@@ -1,17 +1,13 @@
 project(worker CXX)
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -no-pie -pedantic -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -g")
 
 set(HEADERS
         graphs/GraphRepresentation.h
-        graphs/SymmetricMatrix.h
-        graphs/GraphParser.cpp
-        graphs/GraphParser.h)
+        graphs/SymmetricMatrix.h)
 set(SOURCES
         graphs/GraphRepresentation.cpp
-        graphs/SymmetricMatrix.cpp
-        graphs/GraphParser.cpp
-        graphs/GraphParser.h )
+        graphs/SymmetricMatrix.cpp)
 
 add_library(GR STATIC ${HEADERS} ${SOURCES})
 
