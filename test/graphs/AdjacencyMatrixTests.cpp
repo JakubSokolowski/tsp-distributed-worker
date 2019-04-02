@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../../../src/graphs/SymmetricMatrix.h"
+#include "../../src/graphs/SymmetricMatrix.h"
 
 
 TEST(SymmetricMatrix, SymmetricMatrixConstructorTest) {
