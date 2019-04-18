@@ -1,10 +1,9 @@
 #include <iostream>
-#include "proto/message.pb.h"
 #include <ostream>
-
+#include "worker/Worker.h"
 int main() {
-    message::Message m;
-    m.set_id(0,1);
-    std::cout << "Hello Proto!"  << std::endl;
+    auto conf = ConfigurationProvider();
+    auto worker = Worker(conf);
+    worker.Run();
     return 0;
 }

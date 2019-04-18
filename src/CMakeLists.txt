@@ -2,10 +2,9 @@ project(worker CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -g")
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.40.0 REQUIRED system)
-find_package(Boost COMPONENTS asio)
+find_package(Boost COMPONENTS system)
+include_directories(${Boost_INCLUDE_DIR})
 
-ADD_SUBDIRECTORY(proto)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
 set(HEADERS
@@ -15,9 +14,7 @@ set(HEADERS
         solvers/Solver.h
         solvers/bnb/LittleMatrix.h
         solvers/bnb/BranchAndBound.h
-        socket/ConfigurationProvider.h
-        socket/Client.h
-        )
+        worker/Worker.h worker/ConfigurationProvider.cpp worker/ConfigurationProvider.h)
 set(SOURCES
         graphs/GraphRepresentation.cpp
         graphs/SymmetricMatrix.cpp
@@ -25,12 +22,11 @@ set(SOURCES
         solvers/Solver.cpp
         solvers/bnb/LittleMatrix.cpp
         solvers/bnb/BranchAndBound.cpp
-        socket/ConfigurationProvider.cpp
-        socket/Client.cpp )
+        worker/Worker.cpp worker/ConfigurationProvider.cpp worker/ConfigurationProvider.h)
 
 add_library(GR STATIC ${HEADERS} ${SOURCES})
 
 
 add_executable(main main.cpp)
 
-target_link_libraries(main proto GR )
+target_link_libraries(main GR ${Boost_LIBRARIES})
