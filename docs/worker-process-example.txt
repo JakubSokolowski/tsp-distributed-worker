@@ -1,0 +1,26 @@
+WORKER - 1 job per worker
+
+1.Startup:
+	- MAIN-THREAD - Communication Thread
+	- load socket configuration from file
+	- create shared socket - job context with empty job config
+	- connect to socket 
+	- load server assigned worker configuration (id, thread pool size, ...)
+	- idle, block thread wait for job
+	- send "Ready for Job" message to server
+
+2. Job assignment
+	- server sends JobContext (algorithm, instance, ...)
+	- server sends AlgorithmStepContext
+	- worker starts job thread with job context
+	JOB THREAD communication 
+	LOOP:
+	- job thread computes algorithm step
+	- job thread sends AlgorihmStepResult
+	- job thread sends AlgorithmStepContextRequest
+	- job thread receives new AlgorithmStepContext or FIN message
+	- CONTETX - LOOP
+	- FIN - END
+	- job thread joins
+	- main thread sends ReadyForJob message to the server
+

@@ -1,0 +1,6 @@
+1. Worker registartion.
+MAIN THREAD
+- spawn spring application thread
+- spawn main communication thread
+- main context - worker registration
+- on socket connetcion, main thread spawns communication thread, registers worker, assigins him id and 

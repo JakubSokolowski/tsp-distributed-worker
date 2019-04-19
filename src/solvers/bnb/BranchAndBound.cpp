@@ -50,10 +50,10 @@ uint BranchAndBound::FindBranchingPositionAndRegret(const LittleMatrix &m, Edge 
 
                     NORMAL									DISABLED
 
-                    0 1 2 3 4	Disable i and col (2,3) ->   0 1 2 4
+                    0    1 2 3 4	Disable i and col (2,3) ->     0 1 2 4
                     0  - 2 8 9 3 								0  - 2 8 3
                     1  4 - 5 6 3 <- the (1,3) pos is 6			1  4 - 5 3  <- now the (1,3) position in matrix is 5
-                    2  1 3 - 6 2	the edge (1,2) is 6			3  3 4 5 7	   but the edge coresponding to that pos
+                    2  1 3 - 6 2	the edge (1,2) is 6			3  3 4 5 7	   but the edge corresponding to that pos
                     3  3 4 5 - 7								4  2 9 2 -	   is not (1,3) but (1,2)
                     4  2 9 2 3 -
 
@@ -80,8 +80,7 @@ void BranchAndBound::RemoveSubtour(LittleMatrix &m, int index, Edge &path) {
     vector<pair<uint, uint>> paths;
 
     // Research of all the included path
-    while (index)
-    { // Iterate until we are not arrived at the root
+    while (index) {
         if (!tree_m[index].included)
             paths.push_back(tree_m[index].path);
         index = tree_m[index].parent_key;
@@ -99,9 +98,8 @@ void BranchAndBound::RemoveSubtour(LittleMatrix &m, int index, Edge &path) {
                 subtour.push_front(segment.first);
                 found = true;
                 break;
-            }
+            } else if (segment.first == subtour.back()) {
                 // Check that "segment" go behind in a subtour
-            else if (segment.first == subtour.back()) {
                 subtour.push_back(segment.first);
                 subtour.push_back(segment.second);
                 found = true;
@@ -196,8 +194,8 @@ void BranchAndBound::FindTour() {
 
     matrices.push(matrix);
 
-    while (!matrices.empty())
-    {
+    while (!matrices.empty()) {
+
         int id = matrices.top().first;
         LittleMatrix m = matrices.top().second;
         matrices.pop();
@@ -222,8 +220,6 @@ void BranchAndBound::FindTour() {
                 matrices.push(matrix);
             }
 
-            // Branching to the right
-
             // Remove rows, columns, and subtours
             m.RemoveRow(pos.first);
             m.RemoveColumn(pos.second);
@@ -238,10 +234,8 @@ void BranchAndBound::FindTour() {
         }
 
         // Update the best tour and the current_smallest_cost_m value
-        if (m.GetRowNum() == 3)
-        {
-            if (right_node.lower_bound < current_smallest_cost_m)
-            {
+        if (m.GetRowNum() == 3) {
+            if (right_node.lower_bound < current_smallest_cost_m) {
                 UpdateCurrentBestSolution(m);
                 current_smallest_cost_m = right_node.lower_bound;
                 current_best_tour_m = RetrieveNewTourFromTree((int) tree_m.size() - 1, 1);
