@@ -28,12 +28,18 @@ Worker::~Worker() {
 }
 
 void Worker::Run() {
-    for(int i = 0; i < 20; i++) {
-        Write("Hello from client");
-        auto response = Read();
-        cout << "Client received: " << response << endl;
+    Write("READY");
+    auto context = Read();
+    Write("RECEIVED CONTEXT");
+    while(true) {
+        auto task = Read();
+        if(task == "STOP\n") {
+            cout << "CLIENT RECEIVED STOPPED MSG: " << task << endl;
+            break;
+        }
+        Write("hehe");
+        cout << "Client received: " << task << endl;
     }
-
     socket_m.close();
 }
 

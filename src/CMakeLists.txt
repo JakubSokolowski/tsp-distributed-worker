@@ -22,7 +22,7 @@ set(SOURCES
         solvers/Solver.cpp
         solvers/bnb/LittleMatrix.cpp
         solvers/bnb/BranchAndBound.cpp
-        worker/Worker.cpp worker/ConfigurationProvider.cpp worker/ConfigurationProvider.h)
+        worker/Worker.cpp worker/ConfigurationProvider.cpp worker/ConfigurationProvider.h solvers/bruteforce/BruteForce.cpp solvers/bruteforce/BruteForce.h)
 
 add_library(GR STATIC ${HEADERS} ${SOURCES})
 
