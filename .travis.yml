@@ -5,6 +5,8 @@ language:
 
 addons:
   apt:
+    packages:
+      - libboost-all-dev
     sources:
       - ubuntu-toolchain-r-test
 
