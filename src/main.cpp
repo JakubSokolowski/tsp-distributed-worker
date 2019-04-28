@@ -1,5 +1,9 @@
 #include <iostream>
+#include <ostream>
+#include "worker/Worker.h"
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    auto conf = ConfigurationProvider();
+    auto worker = Worker(conf);
+    worker.Run();
     return 0;
 }

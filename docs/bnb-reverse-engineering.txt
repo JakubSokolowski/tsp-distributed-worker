@@ -1,0 +1,12 @@
+SERVER-SIDE SYNCHRONIZED VARIABLES:
+- current_smallest_cost_m
+- current_best_tour_m
+- tree_m
+- matrices_m
+
+- stack of matrices to solve
+- node tree containing possible paths
+ 
+SERVER INDEPENDENT METHODS:
+- FindBranchingPositionAndRegret
+ 
