@@ -14,7 +14,9 @@ set(HEADERS
         solvers/Solver.h
         solvers/bnb/LittleMatrix.h
         solvers/bnb/BranchAndBound.h
-        worker/Worker.h worker/ConfigurationProvider.cpp worker/ConfigurationProvider.h)
+        worker/ConfigurationProvider.h
+        worker/Worker.h
+        solvers/bruteforce/BruteForce.h)
 set(SOURCES
         graphs/GraphRepresentation.cpp
         graphs/SymmetricMatrix.cpp
@@ -22,9 +24,11 @@ set(SOURCES
         solvers/Solver.cpp
         solvers/bnb/LittleMatrix.cpp
         solvers/bnb/BranchAndBound.cpp
-        worker/Worker.cpp worker/ConfigurationProvider.cpp worker/ConfigurationProvider.h solvers/bruteforce/BruteForce.cpp solvers/bruteforce/BruteForce.h)
+        worker/Worker.cpp
+        worker/ConfigurationProvider.cpp
+        solvers/bruteforce/BruteForce.cpp )
 
-add_library(GR STATIC ${HEADERS} ${SOURCES})
+add_library(GR STATIC ${HEADERS} ${SOURCES} )
 
 
 add_executable(main main.cpp)
