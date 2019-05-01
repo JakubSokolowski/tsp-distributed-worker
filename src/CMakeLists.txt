@@ -26,7 +26,7 @@ set(SOURCES
         solvers/bnb/BranchAndBound.cpp
         worker/Worker.cpp
         worker/ConfigurationProvider.cpp
-        solvers/bruteforce/BruteForce.cpp )
+        solvers/bruteforce/BruteForce.cpp solvers/bruteforce/BruteForceTaskSolver.cpp solvers/bruteforce/BruteForceTaskSolver.h)
 
 add_library(GR STATIC ${HEADERS} ${SOURCES} )
 

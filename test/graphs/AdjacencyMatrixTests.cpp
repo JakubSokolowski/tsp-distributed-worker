@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "../../src/graphs/SymmetricMatrix.h"
+#include <nlohmann/json.hpp>
 
+using json = nlohmann::json;
 
 TEST(SymmetricMatrix, SymmetricMatrixConstructorTest) {
     auto matrix = SymmetricMatrix(5);
@@ -33,6 +35,53 @@ TEST(SymmetricMatrix, AsymmetricMatrixAddEdge) {
     EXPECT_EQ(std::numeric_limits<uint>::max(), Graph.GetWeight(3, 3));
     EXPECT_EQ(35, Graph.GetWeight(0, 3));
     EXPECT_EQ(35, Graph.GetWeight(3, 0));
+}
+
+TEST(SymmetricMatrix, JsonConstructor) {
+    auto j2 = R"(
+      {
+        "costMatrix": [
+        [
+            2147483647,
+            10,
+            8,
+            9,
+            7
+        ],
+        [
+            10,
+            2147483647,
+            10,
+            5,
+            6
+        ],
+        [
+            8,
+            10,
+            2147483647,
+            8,
+            9
+        ],
+        [
+            9,
+            5,
+            8,
+            2147483647,
+            6
+        ],
+        [
+            7,
+            6,
+            9,
+            6,
+            2147483647
+        ]
+    ],
+    "numOfEdges": 0
+      }
+    )"_json;
+
+    auto Graph = SymmetricMatrix::FromJson(j2);
 }
 
 

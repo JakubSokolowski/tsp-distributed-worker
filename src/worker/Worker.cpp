@@ -1,4 +1,8 @@
 #include "Worker.h"
+#include <nlohmann/json.hpp>
+#include "../graphs/SymmetricMatrix.h"
+#include "../solvers/bruteforce/BruteForceTaskSolver.h"
+using json = nlohmann::json;
 
 #include <iostream>
 using namespace boost::asio;
@@ -30,14 +34,21 @@ Worker::~Worker() {
 void Worker::Run() {
     Write("READY");
     auto context = Read();
-    Write("RECEIVED CONTEXT");
+    auto graph = SymmetricMatrix::FromJson(context);
+    auto solver = BruteForceTaskSolver(graph);
+    Write("RECEIVED_CONTEXT");
     while(true) {
         auto task = Read();
+
         if(task == "STOP\n") {
             cout << "CLIENT RECEIVED STOPPED MSG: " << task << endl;
             break;
         }
-        Write("hehe");
+        auto task_json = json::parse(task);
+        auto sol = solver.SolveTask(task_json);
+        auto sol_json = sol.ToJson();
+
+        Write(sol_json.dump());
         cout << "Client received: " << task << endl;
     }
     socket_m.close();
