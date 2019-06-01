@@ -1,7 +1,7 @@
 include_directories(GR)
 set(TEST_SOURCES
         HelloTests.cpp
-        graphs/AdjacencyMatrixTests.cpp solvers/bnb/LittleMatrixTests.cpp solvers/bnb/BranchAndBoundTests.cpp)
+        graphs/AdjacencyMatrixTests.cpp solvers/bnb/LittleMatrixTests.cpp solvers/bnb/BranchAndBoundTests.cpp solvers/bruteforce/BruteForceTests.cpp)
 
 
 add_executable(RunTests ${TEST_SOURCES})

@@ -4,7 +4,8 @@ using std::vector;
 
 uint GraphRepresentation::GetTourCost(const vector<uint> &tour) const {
     uint result = 0;
-    for (uint i = 0; i < GetNumOfVertices(); ++i)
+    auto ver = GetNumOfVertices();
+    for (uint i = 0; i < ver; ++i)
         result += GetWeight(tour[i] - 1, tour[i + 1] - 1);
     return result;
 }

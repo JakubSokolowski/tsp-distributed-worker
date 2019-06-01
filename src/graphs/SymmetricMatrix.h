@@ -1,8 +1,10 @@
 #ifndef TSP_SYMMETRIC_MATRIX_H
 #define TSP_SYMMETRIC_MATRIX_H
 
+#include <nlohmann/json.hpp>
 #include "GraphRepresentation.h"
 
+using json = nlohmann::json;
 class SymmetricMatrix :
         public GraphRepresentation
 {
@@ -22,6 +24,8 @@ public:
     uint GetNumOfEdges() const override;
     uint GetNumOfVertices() const override;
     std::string GetGraphInfo()const override;
+    static SymmetricMatrix FromJson(std::string json_str);
+    static SymmetricMatrix FromJson(const json &json_obj);
 
     void Print() const override;
 

@@ -11,10 +11,18 @@ Solution::Solution(uint cost, const Tour &t)
         , tour(t)
 { }
 
-Solution Solution::operator=(Solution &other) {
+Solution Solution::operator=(const Solution &other) {
     tour_cost = other.tour_cost;
     tour = other.tour;
     return *this;
+}
+
+json Solution::ToJson() {
+   json j = {
+           {"tourCost", tour_cost},
+           {"tour", tour}
+   };
+   return j;
 }
 
 Solution::~Solution() = default;

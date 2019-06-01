@@ -1,5 +1,7 @@
 #include "SymmetricMatrix.h"
+#include <nlohmann/json.hpp>
 
+using json = nlohmann::json;
 using std::vector;
 
 SymmetricMatrix::SymmetricMatrix()
@@ -59,4 +61,15 @@ void SymmetricMatrix::Print() const {
 
 vector<vector<uint>> SymmetricMatrix::GetMatrix() {
     return adjacency_matrix_;
+}
+
+SymmetricMatrix SymmetricMatrix::FromJson(std::string json_str) {
+    auto j = json::parse(json_str);
+    Matrix matrix = j["costMatrix"];
+    return SymmetricMatrix(matrix);
+}
+
+SymmetricMatrix SymmetricMatrix::FromJson(const json &json_obj) {
+    Matrix matrix = json_obj["costMatrix"];
+    return SymmetricMatrix(matrix);
 }
