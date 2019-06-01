@@ -5,6 +5,7 @@
 #include <boost/asio.hpp>
 class Worker {
 public:
+    bool finished = false;
     Worker(const ConfigurationProvider &provider);
     Worker(const Worker&);
     ~Worker();
@@ -12,10 +13,11 @@ public:
 
 protected:
     void Write(const std::string& message);
-    void HandleCommunicationError(const boost::system::error_code &error) const ;
+    void HandleCommunicationError(const boost::system::error_code &error, const std::string &msg) const ;
     std::string Read();
 private:
     ConfigurationProvider config_provider_m;
+
     boost::system::error_code error_m;
     boost::asio::io_service io_service_m {};
     boost::asio::ip::tcp::socket socket_m;

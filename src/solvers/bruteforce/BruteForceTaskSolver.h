@@ -12,6 +12,9 @@ class BruteForceTaskSolver {
 public:
     BruteForceTaskSolver(const SymmetricMatrix& graph);
     Solution SolveTask(const json & task);
+    void UpdateGraph(const SymmetricMatrix& graph) {
+        graph_m = graph;
+    }
 private:
     Solution GenerateInitialSolution(const std::vector<uint>& locked_cities);
     SymmetricMatrix graph_m;
