@@ -93,7 +93,7 @@ void Worker::Connect() {
 
 boost::asio::ip::tcp::endpoint Worker::GetTCPEndpoint() const {
     auto configuration = config_provider_m.GetConfiguration();
-    auto address = boost::asio::ip::address::from_string(configuration.address);
+    auto address = boost::asio::ip::address::from_string(configuration.host);
     auto port = configuration.port_num;
     return boost::asio::ip::tcp::endpoint(address, port);
 }
