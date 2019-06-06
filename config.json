@@ -1,0 +1,5 @@
+{
+  "port": 42069,
+  "host": "localhost",
+  "retryIntervalMs": 5000
+}
